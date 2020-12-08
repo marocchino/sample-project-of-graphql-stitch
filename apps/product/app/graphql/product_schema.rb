@@ -6,6 +6,8 @@ class ProductSchema < GraphQL::Schema
   use GraphQL::Execution::Interpreter
   use GraphQL::Analysis::AST
 
+  use BatchLoader::GraphQL
+
   # Add built-in connections for pagination
   use GraphQL::Pagination::Connections
 end
