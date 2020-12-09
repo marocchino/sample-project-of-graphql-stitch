@@ -9,3 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+Image.Repo.insert!(%Image.Image{ url: "http://placekitten.com/200/300" })
+Image.Repo.insert!(%Image.Image{ url: "http://placekitten.com/300/300" })

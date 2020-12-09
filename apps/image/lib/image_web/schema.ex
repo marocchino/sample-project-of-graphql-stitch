@@ -1,5 +1,7 @@
 defmodule ImageWeb.Schema do
   use Absinthe.Schema
+  import Ecto.Query
+  alias Image.Repo
 
   @desc "An item"
   object :image do
@@ -11,8 +13,9 @@ defmodule ImageWeb.Schema do
     field :images, non_null(list_of(non_null(:image))) do
       arg(:ids, non_null(list_of(non_null(:id))))
 
-      resolve(fn %{ids: _}, _ ->
-        {:ok, [%{id: 1, url: "url1"}, %{id: 2, url: "url2"}]}
+      resolve(fn %{ids: ids}, _ ->
+        images = Repo.all(from i in Image.Image, where: i.id in ^ids)
+        {:ok, images}
       end)
     end
   end
